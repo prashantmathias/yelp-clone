@@ -66,6 +66,5 @@ feature 'restaurants' do
         expect(page).to have_content('Restaurant deleted successfully')
         expect(current_path).to eq '/restaurants'
       end
-  end
-
+    end
 end
