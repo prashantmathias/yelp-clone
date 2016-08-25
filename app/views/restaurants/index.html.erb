@@ -13,6 +13,10 @@
 
     <% if restaurant.reviews.any? %>
       <%= restaurant.reviews.each(&:thoughts) %>
+      <% restaurant.reviews.each do |review| %>
+        <%= link_to "Endorse Review", review_endorsements_path(review), method: :post %>
+        <p><%= pluralize review.endorsements.count, 'endorsement' %></p>
+        <% end %>
     <% end %>
   <% end %>
 <% else %>
