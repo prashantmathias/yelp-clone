@@ -36,9 +36,11 @@ Rails.application.routes.draw do
 
   # Example resource route with sub-resources:
   #   resources :products do
-      resources :restaurants do
+      resources :restaurants, shallow: true do
   #     resources :comments, :sales
-        resources :reviews
+        resources :reviews do
+          resources :endorsements
+        end
   #     resource :seller
       end
   #   end
