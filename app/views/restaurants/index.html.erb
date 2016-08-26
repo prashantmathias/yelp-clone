@@ -4,18 +4,17 @@
     <h3> <%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %> </h3>
     <h3> <%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete %> </h3>
     <h3>Average rating: <%= star_rating(restaurant.average_rating) %></h3>
+    <h3> <%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %> </h3>
 
-    <% if current_user.has_reviewed?(restaurant) %>
-      <%= "Sorry, you have already reviewed this restaurant" %><br>
-    <% else %>
-        <h3> <%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %> </h3>
-    <% end %>
 
     <% if restaurant.reviews.any? %>
-      <%= restaurant.reviews.each(&:thoughts) %>
       <% restaurant.reviews.each do |review| %>
-        <%= link_to "Endorse Review", review_endorsements_path(review), method: :post %>
-        <p><%= pluralize review.endorsements.count, 'endorsement' %></p>
+
+        <li>
+          <%= review.thoughts %> <%= review.rating %>
+          <%= link_to "Endorse Review", review_endorsements_path(review), class: 'endorsements-link' %>
+          <span class="endorsements_count"> <%= review.endorsements.count %></span>  <%= 'endorsement'.pluralize(review.endorsements.count)%>
+        </li>
         <% end %>
     <% end %>
   <% end %>
