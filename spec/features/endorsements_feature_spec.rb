@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'byebug'
 
 feature 'endorising reviews' do
   before do
@@ -13,11 +14,12 @@ feature 'endorising reviews' do
     expect(page).to have_content('1 endorsement')
   end
 
-  scenario 'a user can see how many endorsements have been made',js: true do
+  scenario 'a user can see how many endorsements have been made', js: true do
     sign_up
     visit '/restaurants'
+    #byebug
     click_link 'Endorse Review'
-    sleep 1
+    sleep 2
     click_link 'Endorse Review'
     expect(page).to have_content("2 endorsements")
   end
